@@ -533,3 +533,4 @@ public class AddEquipementInterfaceController implements Initializable {
     }
     
 }
+//manque codeqr
