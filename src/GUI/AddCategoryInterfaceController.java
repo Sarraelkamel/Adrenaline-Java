@@ -131,7 +131,7 @@ public class AddCategoryInterfaceController implements Initializable {
         alert.initOwner(owner);
         alert.show();
     }
-
+    //d
     // Crud ajout d'une catégorie
     @FXML
     private void addCategorie(ActionEvent event) throws IOException {
