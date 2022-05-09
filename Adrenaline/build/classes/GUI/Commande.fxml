@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,27 +17,38 @@
                   <Font name="Comic Sans MS Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="admincmdtv" layoutX="55.0" layoutY="170.0" prefHeight="475.0" prefWidth="1000.0">
+            <TableView fx:id="admincmdtv" layoutX="55.0" layoutY="170.0" prefHeight="223.0" prefWidth="484.0">
                <columns>
-                  <TableColumn fx:id="nomcom" prefWidth="141.0" text="Nom Commande" />
-                  <TableColumn fx:id="datecom" prefWidth="145.0" text="Date_Commande" />
-                  <TableColumn fx:id="prixcom" prefWidth="136.0" text="Prix_Commande" />
-                  <TableColumn fx:id="quancom" prefWidth="158.0" text="Quantite" />
-                  <TableColumn fx:id="PrTotal" prefWidth="161.0" text="Prix_Total" />
-                  <TableColumn fx:id="Action" prefWidth="258.0" text="Action" />
-                  <TableColumn fx:id="idcom" prefWidth="75.0" text="Column X" />
+                  <TableColumn fx:id="nomcom" prefWidth="99.66665649414062" text="Nom Commande" />
+                  <TableColumn fx:id="datecom" prefWidth="107.0" text="Date_Commande" />
+                  <TableColumn fx:id="prixcom" prefWidth="104.0" text="Prix_Commande" />
+                  <TableColumn fx:id="quancom" prefWidth="75.3333740234375" text="Quantite" />
+                  <TableColumn fx:id="PrTotal" prefWidth="94.00006103515625" text="Prix_Total" />
+                  <TableColumn fx:id="idcommande" prefWidth="75.0" text="idcommande" visible="false" />
                </columns>
             </TableView>
-            <Button fx:id="btn_deletecommande" layoutX="570.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteCommande" prefHeight="51.0" prefWidth="121.0" stylesheets="@../../../Levelup/src/styles/style.css" text="Supprimer" textFill="WHITE">
+            <Button fx:id="btn_deletecommande" contentDisplay="CENTER" layoutX="116.0" layoutY="406.0" mnemonicParsing="false" onAction="#deleteCommande" prefHeight="51.0" prefWidth="121.0" stylesheets="@../styles/style.css" text="Supprimer" textFill="WHITE">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btn_updatecmd" layoutX="572.0" layoutY="705.0" mnemonicParsing="false" onAction="#updateCommande" prefHeight="51.0" prefWidth="134.0" stylesheets="@../../../Levelup/src/styles/style.css" text="Modifier" textFill="WHITE">
+            <Button fx:id="btn_updatecmd" contentDisplay="CENTER" layoutX="632.0" layoutY="316.0" mnemonicParsing="false" onAction="#updateCommande" prefHeight="51.0" prefWidth="134.0" stylesheets="@../styles/style.css" text="Modifier" textFill="WHITE">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
             </Button>
+            <Label fx:id="label_insert_id" layoutX="14.0" layoutY="243.0" text="insert_idcom" visible="false" />
+            <TextField fx:id="id_commandetf" layoutX="35.0" layoutY="102.0" promptText="id_cmd" visible="false" />
+            <TextField fx:id="nomcmdtf" layoutX="92.0" layoutY="14.0" visible="false" />
+            <TextField fx:id="datecmdtf" layoutX="69.0" layoutY="64.0" visible="false" />
+            <TextField fx:id="prixcmdtf" layoutX="291.0" layoutY="39.0" visible="false" />
+            <TextField fx:id="quantitecmdtf" layoutX="27.0" layoutY="115.0" visible="false" />
+            <Label layoutX="583.0" layoutY="183.0" text="nom :" />
+            <Label layoutX="583.0" layoutY="226.0" text="prix :" />
+            <Label layoutX="582.0" layoutY="260.0" text="quantité :" />
+            <TextField fx:id="nf" layoutX="632.0" layoutY="179.0" />
+            <TextField fx:id="pf" layoutX="632.0" layoutY="222.0" />
+            <TextField fx:id="qf" layoutX="646.0" layoutY="256.0" />
          </children>
       </AnchorPane>
    </children>

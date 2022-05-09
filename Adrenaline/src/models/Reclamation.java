@@ -18,6 +18,7 @@ public class Reclamation {
     private String nom_r;
     private Date date;
     private String description_r;
+    private int reclamation_id_id;
 
     public Reclamation(int id, Commande cmd, String nom_r, Date date, String description_r) {
         this.id = id;
@@ -27,12 +28,29 @@ public class Reclamation {
         this.description_r = description_r;
     }
 
-    public Reclamation(Commande cmd, String nom_r, Date date, String description_r) {
-        this.cmd = cmd;
+    public Reclamation(String nom_r, Date date, String description_r,Commande cmd ) {
+        
         this.nom_r = nom_r;
         this.date = date;
         this.description_r = description_r;
+        this.cmd = cmd;
     }
+        public Reclamation(String nom_r, Date date, String description_r,int reclamation_id_id ) {
+        
+        this.nom_r = nom_r;
+        this.date = date;
+        this.description_r = description_r;
+        this.reclamation_id_id = reclamation_id_id;
+    }
+
+    public int getReclamation_id_id() {
+        return reclamation_id_id;
+    }
+
+    public void setReclamation_id_id(int reclamation_id_id) {
+        this.reclamation_id_id = reclamation_id_id;
+    }
+
 
     public Reclamation(String nom_r, Date date, String description_r) {
         this.nom_r = nom_r;
@@ -108,6 +126,14 @@ public class Reclamation {
     public void setDescription_r(String description_r) {
         this.description_r = description_r;
     }
+
+    public Reclamation( String nom_r, String description_r,int id) {
+        
+        this.nom_r = nom_r;
+        this.description_r = description_r;
+        this.id = id;
+    }
+    
 
     @Override
     public String toString() {

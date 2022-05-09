@@ -24,6 +24,24 @@ public class Commande {
         this.nom_c = nom_c;
     }
 
+    public Commande(int id, String nom_c, Date date, int prix, int quantite) {
+        this.id = id;
+        this.nom_c = nom_c;
+        this.date = date;
+        this.prix = prix;
+        this.quantite = quantite;
+    }
+
+    public Commande( String nom_c, int prix, int quantite, int id) {
+        
+        this.nom_c = nom_c;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.id = id;
+    }
+
+   
+
    
 
     public void setId(int id) {

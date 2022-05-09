@@ -9,10 +9,14 @@ import interfaces.Icommande;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +27,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -56,32 +62,58 @@ public class CommandeController implements Initializable {
     @FXML
     private TableView<Commande> admincmdtv;
     @FXML
-    private TableColumn<?, ?> Action;
-    @FXML
     private Button btn_deletecommande;
     @FXML
-    private TableColumn<?, ?> idcom;
-    @FXML
     private Button btn_updatecmd;
+    @FXML
+    private Label label_insert_id;
+    @FXML
+    private TextField id_commandetf;
+    @FXML
+    private TableColumn<Commande, Integer> idcommande;
+    @FXML
+    private TextField nomcmdtf;
+    @FXML
+    private TextField datecmdtf;
+    @FXML
+    private TextField prixcmdtf;
+    @FXML
+    private TextField quantitecmdtf;
 
+    ObservableList<Commande> list1;
+    @FXML
+    private TextField nf;
+    @FXML
+    private TextField pf;
+    @FXML
+    private TextField qf;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-
-        // Old AFFICHAGE + without selection here
-        List<Commande> listCom = sc.afficherCommande();
-        nomcom.setCellValueFactory(new PropertyValueFactory<>("nom_c"));
-        datecom.setCellValueFactory(new PropertyValueFactory<>("date"));
-        prixcom.setCellValueFactory(new PropertyValueFactory<>("prix"));
-        quancom.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        
-        listCom.forEach((c) -> {
-            admincmdtv.getItems().add(new Commande(c.getNom_c(), c.getDate(), c.getPrix(),c.getQuantite()));
+        admincmdtv.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
+            @Override
+            public void changed(ObservableValue observable , Object oldValue , Object newValue){
+                if(admincmdtv.getSelectionModel().getSelectedItem() != null){
+                    Commande SelectedCommande = admincmdtv.getSelectionModel().getSelectedItem();
+                    id_commandetf.setText(String.valueOf(SelectedCommande.getId()));
+                    nomcmdtf.setText(SelectedCommande.getNom_c());
+                     String e = String.valueOf(SelectedCommande.getQuantite());
+                    quantitecmdtf.setText(e);
+                    String z = String.valueOf(SelectedCommande.getPrix());
+                    prixcmdtf.setText(z);
+                    datecmdtf.setText(String.valueOf(SelectedCommande.getDate()));
+                }
+                else {
+                    admincmdtv.getSelectionModel().clearSelection();
+                } 
+            }
         });
+
+        
+        afficher();
     } 
     
     
@@ -89,7 +121,17 @@ public class CommandeController implements Initializable {
     
     
     
-    
+    public void  afficher(){
+       
+          List<Commande> listCom = sc.afficherCommande();
+          list1 = FXCollections.observableArrayList(listCom);
+        nomcom.setCellValueFactory(new PropertyValueFactory<>("nom_c"));
+        datecom.setCellValueFactory(new PropertyValueFactory<>("date"));
+        prixcom.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        quancom.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+        idcommande.setCellValueFactory(new PropertyValueFactory<>("id"));
+         admincmdtv.setItems(FXCollections.observableArrayList(list1));
+    }
     
     
     
@@ -107,70 +149,24 @@ public class CommandeController implements Initializable {
     
     @FXML
     private void deleteCommande(ActionEvent event) throws IOException {
-        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-        alert1.setTitle("Confirmation de suppression");
-        alert1.setHeaderText(null);
-        alert1.setContentText(" Etes-vous sure de vouloir supprimer cette commende ? ");
-        Optional<ButtonType> action = alert1.showAndWait();
-        if (nomcom.getText().isEmpty()) {
-            System.out.println(" Aucun champ n'est selectionné ");
-            showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(),
-                    " Echec de suppression !  ", " Aucun champ n'a été selectionné! ");
-        } else {
-            if (action.get() == ButtonType.OK) {
-
-                // alerte confirmation suppression
-                sc.supprimerCommande(new Commande(nomcom.getText()));
-
-                root = FXMLLoader.load(getClass().getResource("./Main.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(),
-                        " Succés de suppression! ", " Suppression de la commande établie avec succés! ");
-
-            } else {
-                alert1.close();
-            }
-        }
+      
+        Commande c = admincmdtv.getSelectionModel().getSelectedItem();
+        sc.supprimerCommande(c);
+        afficher();
+        
 
     }
-    
-    
-    
-    
     
     
     
      @FXML
     private void updateCommande(ActionEvent event) throws IOException {
-        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-        alert1.setTitle("Confirmation de modification");
-        alert1.setHeaderText(null);
-        alert1.setContentText(" Etes-vous sure de vouloir modifier cette commande ? ");
-        Optional<ButtonType> action = alert1.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            if (nomcom.getText().isEmpty()) {
-                System.out.println("valeur null");
-                showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(),
-                        " Erreur de modification commande ! ", " Erreur de modification de la commande ! \n Veuillez remplir touts les champs! ");
-                admincmdtv.getSelectionModel().clearSelection();
-                // Alerte de confirmation
-            } else {
-                sc.modifierCommande(new Commande( nomcom.getText(),(Integer.parseInt(prixcom.getText())),(Integer.parseInt(quancom.getText())),(Integer.parseInt(idcom.getText()))));
-                root = FXMLLoader.load(getClass().getResource("./Main.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                
-                showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(),
-                        " Succés de modification! ", " Modification de la commande établie avec succés! ");
-            }
-        } else {
-            alert1.close();
-        }
-    }
+        Commande c = new Commande(nf.getText(),Integer.parseInt(pf.getText()),Integer.parseInt(qf.getText()),admincmdtv.getSelectionModel().getSelectedItem().getId());
     
+        sc.modifierCommande(c);
+        afficher();
+    }
+    public void ajouterCommande (Commande c){
+        
+    }
 }

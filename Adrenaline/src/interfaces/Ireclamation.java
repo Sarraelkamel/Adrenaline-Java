@@ -16,7 +16,7 @@ public interface Ireclamation {
     
     public void ajouterReclamation( Reclamation r);
 
-    public void modifierReclamation(String nom_r,String description_r,int id );
+    public void modifierReclamation(Reclamation r );
 
     public void supprimerReclamation(Reclamation r);
 

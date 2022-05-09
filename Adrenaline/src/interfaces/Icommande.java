@@ -16,7 +16,7 @@ public interface Icommande {
     
     public void ajouterCommande (Commande c);
 
-   public void modifierCommande(String nom_c,int prix ,int quantite,int id );
+   public void modifierCommande(Commande c );
    
     public void supprimerCommande(Commande c);
 

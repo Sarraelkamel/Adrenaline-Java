@@ -29,7 +29,7 @@ public class ServiceReclamation implements Ireclamation{
     public void ajouterReclamation(Reclamation r) {
         
         String request = "INSERT INTO `reclamation`(`reclamation_id_id`, `nom_r`, `date`,`description_r`) VALUES ("
-                + r.getCmd().getId() + ",'"
+                + r.getReclamation_id_id()+ ",'"
                 + r.getNom_r() + "','"
                 + r.getDate() + "','"
                 + r.getDescription_r() + "')" ;
@@ -47,9 +47,9 @@ public class ServiceReclamation implements Ireclamation{
     }
 
     @Override
-    public void modifierReclamation(String nom_r,String description_r,int id ) {
+    public void modifierReclamation(Reclamation r ) {
         
-        String request = "UPDATE `reclamation` SET `nom_r`='" + nom_r + "',`description_r`='" + description_r + " ' WHERE `id`="+id+""; 
+        String request = "UPDATE `reclamation` SET `nom_r`='" + r.getNom_r() + "',`description_r`='" + r.getDescription_r() + " ' WHERE `id`="+r.getId_rec()+""; 
         try {
             Statement st = cnx.createStatement();
             st.executeUpdate(request);

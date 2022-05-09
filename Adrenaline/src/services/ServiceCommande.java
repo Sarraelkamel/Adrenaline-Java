@@ -47,9 +47,9 @@ public class ServiceCommande implements Icommande {
         }
     }
     @Override
-    public void modifierCommande(String nom_c,int prix ,int quantite,int id ) {
+    public void modifierCommande(Commande c ) {
         
-      String request = "UPDATE `commande` SET `nom_c`='" + nom_c+ "', `prix`="+prix+", `quantite`="+quantite+" WHERE `id`="+id+" ";
+      String request = "UPDATE `commande` SET `nom_c`='" + c.getNom_c()+ "', `prix`="+c.getPrix()+", `quantite`="+c.getQuantite()+" WHERE `id`="+c.getId()+" ";
         try {
             Statement st = cnx.createStatement();
             st.executeUpdate(request);
