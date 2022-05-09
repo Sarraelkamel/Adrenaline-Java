@@ -49,6 +49,10 @@
             <TextField fx:id="nf" layoutX="632.0" layoutY="179.0" />
             <TextField fx:id="pf" layoutX="632.0" layoutY="222.0" />
             <TextField fx:id="qf" layoutX="646.0" layoutY="256.0" />
+            <TextField fx:id="textfield" layoutX="125.0" layoutY="90.0" />
+            <TextField fx:id="textfield1" layoutX="125.0" layoutY="128.0" />
+            <Label layoutX="9.0" layoutY="94.0" text="nom commande :" />
+            <Label layoutX="11.0" layoutY="132.0" text="prix commande :" />
          </children>
       </AnchorPane>
    </children>

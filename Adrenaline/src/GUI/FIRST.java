@@ -28,7 +28,7 @@ public class FIRST extends Application {
         //affichageEquipement
         //AddCategoryInterface
         //TopEquipements
-     Parent root = FXMLLoader.load(getClass().getResource("Reclamation.fxml"));
+     Parent root = FXMLLoader.load(getClass().getResource("Commande.fxml"));
              Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

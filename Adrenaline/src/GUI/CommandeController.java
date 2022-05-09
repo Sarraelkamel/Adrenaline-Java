@@ -17,6 +17,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +89,10 @@ public class CommandeController implements Initializable {
     private TextField pf;
     @FXML
     private TextField qf;
+    @FXML
+    private TextField textfield;
+    @FXML
+    private TextField textfield1;
     /**
      * Initializes the controller class.
      */
@@ -131,6 +137,66 @@ public class CommandeController implements Initializable {
         quancom.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         idcommande.setCellValueFactory(new PropertyValueFactory<>("id"));
          admincmdtv.setItems(FXCollections.observableArrayList(list1));
+         
+         
+         
+         
+         FilteredList<Commande> filteredData = new FilteredList<>(list1, b -> true);
+		
+		// 2. Set the filter Predicate whenever the filter changes.
+		textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(commande -> {
+				// If filter text is empty, display all persons.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare first name and last name of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (commande.getNom_c().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches first name.
+				} 
+			
+				     else  
+				    	 return false; // Does not match.
+			});
+		});
+                SortedList<Commande> sortedData = new SortedList<>(filteredData);
+		
+		// 4. Bind the SortedList comparator to the TableView comparator.
+		// 	  Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(admincmdtv.comparatorProperty());
+                FilteredList<Commande> filteredData1 = new FilteredList<>(sortedData, b -> true);
+		textfield1.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData1.setPredicate(commande -> {
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare first name and last name of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+			if (String.valueOf(commande.getPrix()).indexOf(lowerCaseFilter) != -1)
+				     return true;
+			
+				     else  
+				    	 return false; // Does not match.
+			});
+		});
+                	
+		// 3. Wrap the FilteredList in a SortedList. 
+	// 3. Wrap the FilteredList in a SortedList. 
+		
+		   SortedList<Commande> sortedData1 = new SortedList<>(filteredData1);
+		
+		// 4. Bind the SortedList comparator to the TableView comparator.
+		// 	  Otherwise, sorting the TableView would have no effect.
+		sortedData1.comparatorProperty().bind(admincmdtv.comparatorProperty());
+		// 5. Add sorted (and filtered) data to the table.
+		admincmdtv.setItems(sortedData1);
     }
     
     
