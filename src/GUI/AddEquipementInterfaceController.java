@@ -4,13 +4,26 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.oned.Code128Writer;
+import com.google.zxing.pdf417.encoder.BarcodeMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import interfaces.Icategorie;
 import interfaces.Iequipement;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -43,6 +56,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javax.imageio.ImageIO;
 import models.Categorie;
 import models.Equipement;
 import models.jointCategorie;
@@ -110,6 +124,8 @@ public class AddEquipementInterfaceController implements Initializable {
     private Button image;
     @FXML
     private TextField id_Produit;
+    @FXML
+    private Button btnqr;
 
     
     
@@ -531,6 +547,84 @@ public class AddEquipementInterfaceController implements Initializable {
 //        }
         }
     }
-    
-}
+
 //manque codeqr tous est pret et fonctionel
+
+
+  @FXML
+    private void generateQRCode(MouseEvent event) throws WriterException, IOException, InterruptedException {
+
+        Icategorie sc = new ServiceCategorie();
+        String qrCodeText = "-Le nom du equipement est : "
+                + nomEquipementTF.getText()
+                + ".\n============="
+                + ". \n-Son prix est : "
+                + Integer.parseInt(prixTF.getText())
+                + ".\n============="
+                + ".\n-Sa description est : " + descriptionTF.getText();
+
+        // Vérification de l'emplacement de l'image
+        String filePath = "C:\\Users\\MSI\\Documents\\NetBeansProjects\\Adrenaline\\src\\QR\\EquipementQR.png";
+        //C:\Users\MSI\Documents\NetBeansProjects\Adrenaline\src\QR\EquipementQR.png
+        // "C:/Users/zaba2/Desktop/Functional APIs Lundi/Levelup/ProduitQR.png";
+        // Change path not to ecrase old file
+        int size = 500;
+        String fileType = "png";
+        File qrFile = new File(filePath);
+        createQRImage(qrFile, qrCodeText, size, fileType);
+        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert1.setTitle("Confirmation d'ajout");
+        alert1.setHeaderText(null);
+        alert1.setContentText(" Créer le code QR ? ");
+        Optional<ButtonType> action = alert1.showAndWait();
+        if (action.get() == ButtonType.OK) {
+
+            if (showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(),
+                    " Succés de création ! ", " Génération avec succés du code QR du equipement ! " + "\n " + nomEquipementTF.getText())) {
+                File f1 = new File("C:\\Users\\MSI\\Documents\\NetBeansProjects\\Adrenaline\\src\\QR\\EquipementQR.png");
+                Desktop d = Desktop.getDesktop();
+                d.open(f1);
+//                root = FXMLLoader.load(getClass().getResource("./InterfaceCodeQR.fxml"));
+//                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//                scene = new Scene(root);
+//                stage.setScene(scene);
+
+//            Thread.sleep(2);
+//C:\Users\zaba2\Desktop\Functional APIs Lundi\Levelup
+                System.out.println(" Création du code QR avec succés ");
+                createQRImage(qrFile, qrCodeText, size, fileType);
+            }
+
+        }
+    }
+
+    // Execution du méthode du codage
+    private static void createQRImage(File qrFile, String qrCodeText, int size, String fileType)
+            throws WriterException, IOException {
+        // Create the ByteMatrix for the QR-Code that encodes the given String
+        Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, 500, 500, hintMap);
+        // Make the BufferedImage that are to hold the QRCode
+        int matrixWidth = byteMatrix.getWidth();
+        BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
+        image.createGraphics();
+
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+        // Paint and save the image using the ByteMatrix
+        graphics.setColor(Color.BLACK);
+
+        for (int i = 0; i < matrixWidth; i++) {
+            for (int j = 0; j < matrixWidth; j++) {
+                if (byteMatrix.get(i, j)) {
+                    graphics.fillRect(i, j, 1, 1);
+                }
+            }
+        }
+        ImageIO.write(image, fileType, qrFile);
+
+    }
+}

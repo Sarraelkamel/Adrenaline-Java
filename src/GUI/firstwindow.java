@@ -30,7 +30,7 @@ public class firstwindow extends Application {
         //affichageEquipement
         //AddCategoryInterface
         //TopEquipements
-     Parent root = FXMLLoader.load(getClass().getResource("TopEquipements.fxml"));
+     Parent root = FXMLLoader.load(getClass().getResource("AddEquipementInterface.fxml"));
              Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

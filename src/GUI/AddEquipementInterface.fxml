@@ -114,5 +114,10 @@
             <Image url="@../images/logo_2.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnqr" layoutX="181.0" layoutY="642.0" mnemonicParsing="false" onMouseClicked="#generateQRCode" stylesheets="@../styles/style.css" text="Générer Code QR">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
