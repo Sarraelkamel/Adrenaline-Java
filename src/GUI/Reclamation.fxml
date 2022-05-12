@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReclamationController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="37.0" layoutY="20.0" prefHeight="780.0" prefWidth="1143.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="457.0" layoutY="51.0" prefHeight="51.0" prefWidth="329.0" text="Mes Reclamations">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="36.0" />
+               </font>
+            </Label>
+            <TableView fx:id="adminrectv" layoutX="55.0" layoutY="170.0" prefHeight="251.0" prefWidth="329.0">
+               <columns>
+                  <TableColumn fx:id="nomrec" prefWidth="107.66665649414062" text="Nom Reclamation" />
+                  <TableColumn fx:id="daterec" prefWidth="130.33331298828125" text="Date_Reclamation" />
+                  <TableColumn fx:id="descriptionrec" minWidth="0.0" prefWidth="84.00003051757812" text="Description" />
+               </columns>
+            </TableView>
+            <Button fx:id="btn_deleterec" layoutX="74.0" layoutY="442.0" mnemonicParsing="false" onAction="#deleteReclamation" prefHeight="51.0" prefWidth="121.0" stylesheets="@../styles/style.css" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_updaterec" layoutX="440.0" layoutY="318.0" mnemonicParsing="false" onAction="#updateReclamation" prefHeight="51.0" prefWidth="134.0" stylesheets="@../styles/style.css" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="442.0" layoutY="232.0" text="description :" />
+            <Label layoutX="442.0" layoutY="180.0" text="nom :" />
+            <TextField fx:id="nf" layoutX="497.0" layoutY="176.0" />
+            <TextField fx:id="df" layoutX="517.0" layoutY="228.0" />
+            <Label layoutX="771.0" layoutY="172.0" text="nom :" />
+            <Label layoutX="771.0" layoutY="211.0" text="date :" />
+            <Label layoutX="772.0" layoutY="253.0" text="description :" />
+            <TextField fx:id="tna" layoutX="837.0" layoutY="168.0" />
+            <TextField fx:id="tda" layoutX="858.0" layoutY="249.0" />
+            <DatePicker fx:id="da" layoutX="825.0" layoutY="207.0" />
+            <Button fx:id="btn_ajouter" layoutX="800.0" layoutY="395.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="51.0" prefWidth="134.0" stylesheets="@../styles/style.css" text="Ajouter" textFill="WHITE">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Button>
+            <Label fx:id="combo" layoutX="773.0" layoutY="296.0" text="commande :" />
+            <TextField fx:id="idc" layoutX="882.0" layoutY="292.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

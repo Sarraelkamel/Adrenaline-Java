@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SponsorController">
+   <children>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="gestion sponsor">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="707.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <TableView fx:id="apprenants" layoutX="3.0" layoutY="88.0" prefHeight="338.0" prefWidth="348.0">
+                           <columns>
+                              <TableColumn fx:id="idsp" prefWidth="40.0" text="id" />
+                              <TableColumn fx:id="nomsp" prefWidth="64.0" text="nom" />
+                              <TableColumn fx:id="numsp" text="num_tel" />
+                              <TableColumn fx:id="emailsp" prefWidth="164.0" text="adresse_email" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="btn_supp" layoutX="599.0" layoutY="451.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#delete" prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #D72400;" text="Supprimer" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" specularConstant="0.7" specularExponent="33.95" surfaceScale="1.73">
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant>
+                                       <color>
+                                          <Color blue="0.12037037312984467" green="0.12037037312984467" red="1.0" />
+                                       </color>
+                                    </Light.Distant>
+                                 </light>
+                              </Lighting>
+                           </effect></Button>
+                        <Button fx:id="modifier" layoutX="463.0" layoutY="451.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#click" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #3F93C6;" text="Modifier" textFill="#220808" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" specularConstant="0.7" specularExponent="33.95" surfaceScale="1.73">
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Button>
+                        <Label contentDisplay="CENTER" layoutX="123.0" layoutY="35.0" text="Listes des Sponsors" textFill="#ee7f03">
+                           <font>
+                              <Font name="Tahoma" size="32.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Label>
+                        <HBox layoutX="458.0" layoutY="39.0" prefHeight="30.0" prefWidth="276.0" style="-fx-background-color: #fff;">
+                           <children>
+                              <ComboBox fx:id="trinom" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="txt_nom" layoutX="547.0" layoutY="108.0" />
+                        <TextField fx:id="txt_num" layoutX="547.0" layoutY="178.0" />
+                        <TextField fx:id="txt_email" layoutX="547.0" layoutY="257.0" />
+                        <Label layoutX="411.0" layoutY="113.0" text="Nom :" />
+                        <Label layoutX="400.0" layoutY="183.0" text="Num_Tel :" />
+                        <Label layoutX="410.0" layoutY="262.0" text="Email :" />
+                        <Button fx:id="btn_ajouter" layoutX="333.0" layoutY="451.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ajouter" prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #008000;" text="Ajouter" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" specularConstant="0.7" specularExponent="33.95" surfaceScale="1.73">
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant color="#42ff21" />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
